@@ -46,7 +46,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityClient.getStudentLocations() { locations, error in
             
             if error != nil {
-                self.showAlert(message: error?.localizedDescription ?? "Something went wrong", title: "Problem in Downloading Data")
+                DispatchQueue.main.async {
+                    self.showAlert(message: error?.localizedDescription ?? "Something went wrong", title: "Error in Downloading")
+                }
             }else {
                 self.mapView.removeAnnotations(self.annotations)
                 self.annotations.removeAll()

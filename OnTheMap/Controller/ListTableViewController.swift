@@ -48,12 +48,21 @@ class ListTableViewController: UITableViewController {
     
     func getStudentsList() {
         showActivityIndicator()
-        UdacityClient.getStudentLocations() {students, error in
-            self.students = students ?? []
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.hideActivityIndicator()
+        UdacityClient.getStudentLocations() { students, error in
+            
+            if error != nil {
+                
+                DispatchQueue.main.async {
+                    self.showAlert(message: error?.localizedDescription ?? "Something went wrong!", title: "Error!")
+                }
+            }else {
+                self.students = students ?? []
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.hideActivityIndicator()
+                }
             }
+           
         }
     }
 
