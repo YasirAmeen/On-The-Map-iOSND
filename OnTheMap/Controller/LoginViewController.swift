@@ -50,12 +50,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func handleLoginResponse(success: Bool, error: Error?) {
         setLoggingIn(false)
+        
         if success {
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "login", sender: nil)
             }
         } else {
-            showAlert(message: "Please enter valid credentials.", title: "Login Error")
+            showAlert(message: error?.localizedDescription ?? "Please enter valid credentials.", title: "Login Error")
         }
     }
     

@@ -30,7 +30,7 @@ class UdacityClient: NSObject {
             case .udacityLogin:
                 return Endpoints.base + "/session"
             case .getStudentLocations:
-                return Endpoints.base + "/StudentLocation?limit=100&order=-updatedAt"
+                return Endpoints.base + "/StudentLocation?limit=1000&order=-updatedAt"
             case .addLocation:
                 return Endpoints.base + "/StudentLocation"
             case .updateLocation:
@@ -73,7 +73,7 @@ class UdacityClient: NSObject {
                 })
                 completion(true, nil)
             } else {
-                completion(false, nil)
+                completion(false, error)
             }
         }
     }
@@ -86,7 +86,7 @@ class UdacityClient: NSObject {
                 print("First Name : \(response.firstName) && Last Name : \(response.lastName) && Full Name: \(response.nickname)")
                 Auth.firstName = response.firstName
                 Auth.lastName = response.lastName
-                completion(true, nil)
+                completion(false, error)
             } else {
                 print("Failed to get user's profile.")
                 completion(false, error)

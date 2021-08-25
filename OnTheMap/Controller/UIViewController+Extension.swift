@@ -12,14 +12,9 @@ extension UIViewController {
     // MARK: Enabled and disabled states for buttons
     
     func buttonEnabled(_ enabled: Bool, button: UIButton) {
-        if enabled {
-            button.isEnabled = true
-            button.alpha = 1.0
-        } else {
-            button.isEnabled = false
-            button.alpha = 0.5
+            button.isEnabled = enabled
+            button.alpha = enabled ? 1.0 : 0.5
         }
-    }
     
     // MARK: Show alerts
     
